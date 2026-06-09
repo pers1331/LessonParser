@@ -1,8 +1,10 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import simpledialog
+from tkinter import filedialog
 
 from lesson import Lesson
+from command_processor import CommandProcessor
 
 
 class LessonGUI:
@@ -41,12 +43,20 @@ class LessonGUI:
             command=self.delete_lesson
         )
 
+        command_button = tk.Button(
+            button_frame,
+            text="Команды",
+            command=self.execute_commands
+        )
+
         add_button.pack(side=tk.LEFT, padx=10, pady=10)
         delete_button.pack(side=tk.LEFT, padx=10, pady=10)
+        command_button.pack(side=tk.LEFT, padx=10, pady=10)
 
         self.refresh_table()
 
     def refresh_table(self):
+
         for item in self.tree.get_children():
             self.tree.delete(item)
 
@@ -62,6 +72,7 @@ class LessonGUI:
             )
 
     def add_lesson(self):
+
         date = simpledialog.askstring(
             "Добавление",
             "Введите дату:"
@@ -78,21 +89,49 @@ class LessonGUI:
         )
 
         if date and time and teacher:
+
             self.lessons.append(
-                Lesson(date, time, teacher)
+                Lesson(
+                    date,
+                    time,
+                    teacher
+                )
             )
 
             self.refresh_table()
 
     def delete_lesson(self):
+
         selected = self.tree.selection()
 
         if selected:
-            index = self.tree.index(selected[0])
+
+            index = self.tree.index(
+                selected[0]
+            )
 
             del self.lessons[index]
 
             self.refresh_table()
+
+    def execute_commands(self):
+
+        filename = filedialog.askopenfilename(
+            title="Выберите файл команд"
+        )
+
+        if not filename:
+            return
+
+        processor = CommandProcessor(
+            self.lessons
+        )
+
+        self.lessons = processor.execute(
+            filename
+        )
+
+        self.refresh_table()
 
     def run(self):
         self.root.mainloop()

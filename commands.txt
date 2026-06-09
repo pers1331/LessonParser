@@ -1,0 +1,3 @@
+ADD Lesson 2025.06.15 12:00 "Смирнов А.А."
+REM Петров П.П.
+SAVE result.txt
