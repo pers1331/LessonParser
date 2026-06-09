@@ -3,10 +3,3 @@ class Lesson:
         self.date = date
         self.time = time
         self.teacher = teacher
-
-    def __str__(self):
-        return (
-            f"Дата: {self.date}\n"
-            f"Время: {self.time}\n"
-            f"Преподаватель: {self.teacher}"
-        )

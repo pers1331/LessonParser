@@ -1,15 +1,16 @@
-from lesson_parser import LessonParser
+from file_manager import FileManager
+from gui import LessonGUI
 
 
 def main():
-    text = 'Lesson 2025.06.10 09:30 "Иванов И.И."'
+    lessons = FileManager.load_lessons(
+        "lessons.txt"
+    )
 
-    parser = LessonParser()
-    lesson = parser.parse(text)
+    app = LessonGUI(lessons)
 
-    print(lesson)
+    app.run()
 
 
 if __name__ == "__main__":
     main()
-
