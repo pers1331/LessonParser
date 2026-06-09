@@ -1,5 +1,7 @@
 import os
+
 from lesson_parser import LessonParser
+from logger import Logger
 
 
 class FileManager:
@@ -18,9 +20,14 @@ class FileManager:
             for line in file:
                 line = line.strip()
 
-                if line:
-                    lessons.append(
-                        parser.parse(line)
-                    )
+                if not line:
+                    continue
+
+                try:
+                    lesson = parser.parse(line)
+                    lessons.append(lesson)
+
+                except ValueError as error:
+                    Logger.log_error(line, error)
 
         return lessons
