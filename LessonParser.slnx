@@ -1,5 +1,11 @@
 <Solution>
-  <Project Path="main/main.pyproj" Type="888888a0-9f3d-457c-b088-3a5042f75d52">
-    <Build Project="false" />
-  </Project>
+  <Folder Name="/LessonParser/">
+    <File Path="main/file_manager.py" />
+    <File Path="main/gui.py" />
+    <File Path="main/lesson.py" />
+    <File Path="main/lessons.txt" />
+    <File Path="main/lesson_parser.py" />
+    <File Path="main/main.py" />
+    <File Path="main/validator.py" />
+  </Folder>
 </Solution>
